@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  auth-service:
+    image: ghcr.io/vkirs229037/auth-service:${TAG:-latest}
+    environment:
+      - DATABASE_URL=...
+    networks:
+      - app-net
+
+  search-service:
+    image: ghcr.io/vkirs229037/search-service:${TAG:-latest}
+    networks:
+      - app-net
+
+  frontend:
+    image: ghcr.io/vkirs229037/frontend:${TAG:-latest}
+    networks:
+      - app-net
+
+  nginx-proxy:
+    image: ghcr.io/vkirs229037/nginx-proxy:${TAG:-latest}
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - auth-service
+      - search-service
+      - frontend
+
+networks:
+  app-net:
