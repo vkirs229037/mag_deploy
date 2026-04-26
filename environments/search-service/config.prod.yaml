@@ -1,0 +1,8 @@
+log_paths:
+  - "/logs"
+AUTH_SERVICE_URL: http://auth_service:5000
+max_files_per_request: 80
+default_fuzziness: 85
+default_page_size: 20
+debug_mode: false
+VERSION: "1.0.0"

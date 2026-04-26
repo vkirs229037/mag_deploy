@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  auth-service:
+    image: ghcr.io/vkirs229037/auth-service:${TAG}
+    volumes:
+      - ./environments/auth-service/config.prod.yaml:/app/config.yaml:ro
+    environment:
+      - SQLALCHEMY_DATABASE_URI={SQLALCHEMY_DATABASE_URI}
+      - SECRET_KEY=${AUTH_SECRET_KEY}
+    networks:
+      - app-net
+
+  search-service:
+    image: ghcr.io/vkirs229037/search-service:${TAG}
+    volumes:
+      - ./environments/search-service/config.prod.yaml:/app/config.yaml:ro
+    environment:
+      - DATABASE_USER=${SEARCH_DB_USER}
+      - DATABASE_PASSWORD=${SEARCH_DB_PASSWORD}
+    networks:
+      - app-net
+
+  frontend:
+    image: ghcr.io/vkirs229037/frontend:${TAG}
+    networks:
+      - app-net
+
+  nginx-proxy:
+    image: ghcr.io/vkirs229037/nginx-proxy:${TAG}
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - auth-service
+      - search-service
+      - frontend
+
+networks:
+  app-net:

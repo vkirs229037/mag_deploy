@@ -1,0 +1,8 @@
+log_paths:
+  - "./test/logs"
+AUTH_SERVICE_URL: null
+max_files_per_request: 10
+default_fuzziness: 60
+default_page_size: 10
+debug_mode: true
+VERSION: "1.0.0test"

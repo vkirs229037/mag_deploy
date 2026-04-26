@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  auth-service:
+    image: auth-service:latest
+    volumes:
+      - ../environments/auth-service/config.dev.yaml:/app/config.yaml:ro
+    environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:///dev.db
+      - SECRET_KEY=12345678
+    networks:
+      - app-net
+
+  search-service:
+    image: search-service:latest
+    volumes:
+      - ../environments/search-service/config.dev.yaml:/app/config.yaml:ro
+    networks:
+      - app-net
+
+  frontend:
+    image: frontend:latest
+    # конфиг уже в образе (nginx-frontend.conf)
+    networks:
+      - app-net
+
+  nginx-proxy:
+    image: nginx-proxy:latest
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - auth-service
+      - search-service
+      - frontend
+
+networks:
+  app-net:

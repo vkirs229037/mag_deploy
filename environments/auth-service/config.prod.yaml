@@ -1,0 +1,4 @@
+token_expiration_hours: 6
+debug_mode: false
+SQLALCHEMY_TRACK_MODIFICATIONS: false
+VERSION: "1.0.0"

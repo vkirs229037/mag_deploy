@@ -1,0 +1,6 @@
+token_expiration_hours: 168
+debug_mode: true
+SECRET_KEY: "test"
+SQLALCHEMY_DATABASE_URI: "sqlite:///test/test.db"
+SQLALCHEMY_TRACK_MODIFICATIONS: false
+VERSION: "1.0.0test"

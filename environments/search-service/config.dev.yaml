@@ -1,0 +1,8 @@
+log_paths:
+  - "../sample_logs"
+AUTH_SERVICE_URL: http://127.0.0.1:5000
+max_files_per_request: 10
+default_fuzziness: 65
+default_page_size: 20
+debug_mode: true
+VERSION: "1.0.0dev"
