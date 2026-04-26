@@ -1,6 +1,6 @@
 services:
   auth-service:
-    image: ghcr.io/vkirs229037/mag_auth:latest:local
+    image: ghcr.io/vkirs229037/mag_auth:latest
     volumes:
       - ../environments/auth-service/config.dev.yaml:/app/config.yaml:ro
     environment:
@@ -23,7 +23,7 @@ services:
       - app-net
 
   nginx-proxy:
-    image: nginx-proxy:local
+    image: ghcr.io/vkirs229037/nginx-proxy:latest
     ports:
       - "80:80"
     networks:
